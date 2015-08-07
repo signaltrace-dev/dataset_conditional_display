@@ -79,6 +79,16 @@ function dataset_conditional_display_form_dataset_node_form_alter(&$form, &$form
         {
           unset($form['#submit']);
           unset($form['actions']);
+
+          $form['no_edit_notice'] = array(
+            '#markup' => '<div class="pnl-redirect-notice">' . t('NOTICE: This record is currently under the ownership of the Data Management role and cannot be edited at this time.' . '</div>'),
+            '#weight' => -99,
+          );
+
+          foreach(element_children($form) as $key) {
+            $form[$key]['#disabled'] = TRUE;
+          }
+
         }
     }
 }

@@ -67,7 +67,7 @@ function dataset_conditional_display_form_dataset_node_form_alter(&$form, &$form
     else if($workflow_sid < DS_CON_DATA_FILES_SUPPLIED){
     }
     if(!user_access('override dataset edit')){
-      if($workflow_sid == DS_CON_NEW_REQUEST
+      if(!empty($form['nid']['#value']) && ($workflow_sid == DS_CON_NEW_REQUEST
         || $workflow_sid == DS_CON_METADATA_SUPPLIED
         || $workflow_sid == DS_CON_METADATA_APPROVED
         || $workflow_sid == DS_CON_DATA_FILES_SUPPLIED
@@ -75,7 +75,7 @@ function dataset_conditional_display_form_dataset_node_form_alter(&$form, &$form
         || $workflow_sid == DS_CON_DATA_SUBMITTED_TO_GRIIDC
         || $workflow_sid == DS_CON_DATA_LIST_DATA_AS_PUBLIC
         || $workflow_sid == DS_CON_DATA_LISTED_PUBLIC
-        || $workflow_sid == DS_CON_MARKED_FOR_DELETION)
+        || $workflow_sid == DS_CON_MARKED_FOR_DELETION))
         {
           unset($form['#submit']);
           unset($form['actions']);
